@@ -14,6 +14,7 @@
 //  - Comment accéder au prix du 2e cours ? Au 1er créneau du 3e cours ?
 // TODO : affichez `cours` dans la console avec console.log(), puis explorez-le.
 
+console.log(cours);
 
 // ------------------------------------------------------------
 // ÉTAPE 1 : Sélectionner les éléments du DOM
@@ -25,6 +26,18 @@
 // TODO : récupérez ces éléments et rangez-les dans des constantes.
 // Question : quelle est la différence entre getElementById et querySelector ?
 
+const listecours = document.querySelector("#courses-container");
+ cours.forEach((c) => {
+    listecours.innerHTML += `<article class="cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm ring-2 ring-teal-600 transition hover:shadow-md" data-id="${c.id}">
+            <img src="${c.image}" alt="${c.nom}" class="h-36 w-full object-cover" />
+            <div class="space-y-1 p-4">
+              <span class="inline-block rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">${c.categorie}</span>
+              <h3 class="text-lg font-semibold text-slate-900">${c.nom}</h3>
+              <p class="text-sm text-slate-600">${c.duree}, avec ${c.coach}</p>
+              <p class="pt-1 text-base font-bold text-slate-900"> ${c.prix} € <span class="text-sm font-normal text-slate-500">par place</span></p>
+            </div>
+          </article>`
+ });
 
 // ------------------------------------------------------------
 // ÉTAPE 2 : État de l'application
