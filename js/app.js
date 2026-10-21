@@ -26,18 +26,17 @@ console.log(cours);
 // TODO : récupérez ces éléments et rangez-les dans des constantes.
 // Question : quelle est la différence entre getElementById et querySelector ?
 
-const listecours = document.querySelector("#courses-container");
- cours.forEach((c) => {
-    listecours.innerHTML += `<article class="cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm ring-2 ring-teal-600 transition hover:shadow-md" data-id="${c.id}">
-            <img src="${c.image}" alt="${c.nom}" class="h-36 w-full object-cover" />
-            <div class="space-y-1 p-4">
-              <span class="inline-block rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">${c.categorie}</span>
-              <h3 class="text-lg font-semibold text-slate-900">${c.nom}</h3>
-              <p class="text-sm text-slate-600">${c.duree}, avec ${c.coach}</p>
-              <p class="pt-1 text-base font-bold text-slate-900"> ${c.prix} € <span class="text-sm font-normal text-slate-500">par place</span></p>
-            </div>
-          </article>`
- });
+const courseescontainer = document.getElementById("courses-container");
+const selectedcoursetitle = document.getElementById("selected-course-title");
+const slotscontainer = document.getElementById("slots-container");
+const seatscontainer = document.getElementById("seats-container");
+const summarycourse = document.getElementById("summary-course");
+const summaryslot = document.getElementById("summary-slot");
+const summaryseats = document.getElementById("summary-seats");
+const summarycount = document.getElementById("summary-count");
+const summarytotal = document.getElementById("summary-total");
+const confirmbutton = document.getElementById("confirm-button");
+
 
 // ------------------------------------------------------------
 // ÉTAPE 2 : État de l'application
@@ -48,6 +47,15 @@ const listecours = document.querySelector("#courses-container");
 //  (cours choisi, créneau choisi, emplacements choisis...)
 // Indice : pourquoi un tableau est-il adapté pour les emplacements choisis ?
 
+/*const cartes = document.getElementById(article);
+cours.forEach((carte) =>{
+ carte.addEventListener('click', function () {
+ cours.forEach(function (c) {
+ c.cours.remove('ring-2', 'ring-teal-600');
+ });
+ carte.cours.add('ring-2', 'ring-teal-600');
+ });
+});*/
 
 // ------------------------------------------------------------
 // ÉTAPE 3 : Afficher les cours (US01)
@@ -61,7 +69,20 @@ const listecours = document.querySelector("#courses-container");
 //  - Comment stocker l'id du cours sur la carte (indice : data-*) ?
 //  - Les template literals (`...${valeur}...`) peuvent-ils vous aider ?
 
-
+const listecours = document.querySelector("#courses-container");
+let listecourse="";
+ cours.forEach((c) => {
+     listecourse += `<article class="cursor-pointer overflow-hidden rounded-2xl bg-white shadow-sm ring-2 ring-teal-600 transition hover:shadow-md" data-id="${c.id}">
+          <img src="${c.image}" alt="${c.nom}" class="h-36 w-full object-cover" />
+            <div class="space-y-1 p-4">
+              <span class="inline-block rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700">${c.categorie}</span>
+              <h3 class="text-lg font-semibold text-slate-900">${c.nom}</h3>
+              <p class="text-sm text-slate-600">${c.duree}, avec ${c.coach}</p>
+              <p class="pt-1 text-base font-bold text-slate-900"> ${c.prix} € <span class="text-sm font-normal text-slate-500">par place</span></p>
+            </div>
+          </article>`  
+ });
+ listecours.innerHTML = listecourse;
 // ------------------------------------------------------------
 // ÉTAPE 4 : Sélectionner un cours (US02)
 // ------------------------------------------------------------
@@ -73,7 +94,6 @@ const listecours = document.querySelector("#courses-container");
 //  - Faut-il un écouteur par carte, ou un seul sur le conteneur ? Quels sont les avantages ?
 //  - Comment retrouver le cours à partir de l'id lu dans la carte ?
 //  - Que faut-il réinitialiser quand on change de cours ?
-
 
 // ------------------------------------------------------------
 // ÉTAPE 5 : Afficher et sélectionner un créneau (US03)
