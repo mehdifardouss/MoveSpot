@@ -46,16 +46,10 @@ const confirmbutton = document.getElementById("confirm-button");
 // Question : de quelles informations avez-vous besoin ?
 //  (cours choisi, créneau choisi, emplacements choisis...)
 // Indice : pourquoi un tableau est-il adapté pour les emplacements choisis ?
+let stockcours = [];
+let stockcreneau= [];
+let stockemplacements = [];
 
-/*const cartes = document.getElementById(article);
-cours.forEach((carte) =>{
- carte.addEventListener('click', function () {
- cours.forEach(function (c) {
- c.cours.remove('ring-2', 'ring-teal-600');
- });
- carte.cours.add('ring-2', 'ring-teal-600');
- });
-});*/
 
 // ------------------------------------------------------------
 // ÉTAPE 3 : Afficher les cours (US01)
@@ -94,6 +88,22 @@ let listecourse="";
 //  - Faut-il un écouteur par carte, ou un seul sur le conteneur ? Quels sont les avantages ?
 //  - Comment retrouver le cours à partir de l'id lu dans la carte ?
 //  - Que faut-il réinitialiser quand on change de cours ?
+
+const cartes = document.querySelectorAll("#courses-container article");
+  aannuler();
+cartes.forEach((carte) => {
+  carte.addEventListener("click", function () {
+    aannuler();
+    carte.classList.add("ring-3", "ring-teal-600");
+
+  });
+});
+ function aannuler()
+ {cartes.forEach((carte) => {
+      carte.classList.remove("ring-3", "ring-teal-600");
+    })
+    return;
+  }
 
 // ------------------------------------------------------------
 // ÉTAPE 5 : Afficher et sélectionner un créneau (US03)
