@@ -137,29 +137,37 @@ cartes.forEach((carte) => {
     let cartuno = cours.find((c) => c.id === lid);
     selectedcoursetitle.textContent = cartuno.nom;
     afficherbutton(cartuno);
+    changeButtonsStyle();
   });
 
 });
 
 
 
-const lebutton = document.getElementById("#slots-container button ");
-lebutton.forEach((btn) => {
-  btn.addEventListener(`click`, () => {
-    modifierstylebtn(btn);
-  })
-});
+function changeButtonsStyle() {
+  const lebutton = slotscontainer.querySelectorAll("[data-id]");
+  console.log(lebutton)
+  lebutton.forEach((btn) => {
+
+    btn.addEventListener(`click`, () => {
+      lebutton.forEach((butn) => {
+        butn.classList.remove("bg-teal-600");
+      })
+      btn.classList.add("bg-teal-600");
+    });
+  });
+}
 
 
 
 
 
-function afficherbutton (cartuno) {
+function afficherbutton(cartuno) {
   slotscontainer.innerHTML = "";
   cartuno.creneaux.forEach((c) => {
 
     slotscontainer.innerHTML += `
-          <button type="button" class="rounded-xl border px-4 py-2 text-sm font-medium transition border-teal-600 bg-teal-600 text-white" data-id="${c.id}">
+          <button type="button" class="rounded-xl border px-4 py-2 text-sm font-medium transition border-teal-600 " data-id="${c.id}">
              ${c.jour} <span class="font-normal">${c.heure} </span>
           </button>
          `
@@ -167,14 +175,6 @@ function afficherbutton (cartuno) {
 };
 
 
-function modifierstylebtn(c) {
-  lebutton.forEach((c) => {
-
-    c.classList.remove("bg-teal-600");
-  })
-  c.classList.add("bg-teal-600");
-
-};
 
 
 function modifierstyle(c) {
