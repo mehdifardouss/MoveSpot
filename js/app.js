@@ -92,6 +92,20 @@
 //  - Quand cette fonction doit-elle être appelée ?
 //  - Que se passe-t-il si aucun cours n'est encore sélectionné ?
 
+
+
+// ------------------------------------------------------------
+// ÉTAPE 6 : Afficher le plan de la salle (US04)
+// ------------------------------------------------------------
+// TODO : générez les 30 emplacements (5 rangées x 6 tapis) avec des boucles.
+//  - Identifiants attendus : A1, A2... A6, B1... E6.
+//  - Les emplacements présents dans `occupes` du créneau choisi doivent être
+//    visuellement différents et NON sélectionnables.
+// Questions :
+//  - Comment construire "A1" à partir d'une rangée et d'un numéro ?
+//  - Comment savoir si un emplacement est dans la liste des occupés (includes) ?
+//  - Faut-il une boucle imbriquée ? Pourquoi ?
+
 console.log(cours);
 
 
@@ -135,6 +149,7 @@ cartes.forEach((carte) => {
     modifierstyle(carte);
     let lid = carte.dataset.id;
     let cartuno = cours.find((c) => c.id === lid);
+    stockcours = cartuno;
     selectedcoursetitle.textContent = cartuno.nom;
     afficherbutton(cartuno);
     changeButtonsStyle();
@@ -146,7 +161,6 @@ cartes.forEach((carte) => {
 
 function changeButtonsStyle() {
   const lebutton = slotscontainer.querySelectorAll("[data-id]");
-  console.log(lebutton)
   lebutton.forEach((btn) => {
 
     btn.addEventListener(`click`, () => {
@@ -154,6 +168,8 @@ function changeButtonsStyle() {
         butn.classList.remove("bg-teal-600");
       })
       btn.classList.add("bg-teal-600");
+      stockcreneau = stockcours.creneaux.find((cr) => cr.id === btn.dataset.id);
+      ocuppecheck();
     });
   });
 }
@@ -189,17 +205,22 @@ function modifierstyle(c) {
 
 
 
-// ------------------------------------------------------------
-// ÉTAPE 6 : Afficher le plan de la salle (US04)
-// ------------------------------------------------------------
-// TODO : générez les 30 emplacements (5 rangées x 6 tapis) avec des boucles.
-//  - Identifiants attendus : A1, A2... A6, B1... E6.
-//  - Les emplacements présents dans `occupes` du créneau choisi doivent être
-//    visuellement différents et NON sélectionnables.
-// Questions :
-//  - Comment construire "A1" à partir d'une rangée et d'un numéro ?
-//  - Comment savoir si un emplacement est dans la liste des occupés (includes) ?
-//  - Faut-il une boucle imbriquée ? Pourquoi ?
+
+
+function ocuppecheck() {
+  const idbutn = seatscontainer.querySelectorAll("[data-id]");
+  idbutn.forEach((btn) => {
+  const idplace = btn.dataset.id;
+   btn.classList.remove('bg-red-300')  
+    if (stockcreneau.occupes.includes(idplace)) {
+      btn.classList.add('bg-red-300')  ;
+      btn.disabled = true;
+    }
+    
+  });
+};
+
+
 
 
 // ------------------------------------------------------------
